@@ -60,7 +60,8 @@ class Kwc_Newsletter_Detail_StatisticsController extends Kwf_Controller_Action_A
             'percent' => number_format(($count / $total)*100, 2) . '%'
         );
         foreach (Kwf_Component_Data_Root::getInstance()->getPlugins('Kwc_Newsletter_PluginInterface') as $plugin) {
-            $statisticRows = $plugin->getNewsletterStatisticRows($total);
+            $jobId = $newsletterComponent->getComponent()->getData()->parent->id;
+            $statisticRows = $plugin->getNewsletterStatisticRows($total, $jobId);
             foreach ($statisticRows as $row) {
                 $ret[] = array(
                     'pos' => $pos++,
